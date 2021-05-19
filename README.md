@@ -2,8 +2,8 @@
 
 This is a driven code for high-speed low-inductance PMSM. The code is developed based on Texus Instrument C2000 development kit.
 
-The main control structure is built using Field-oriented control (FOC) structure. This is a vector control method for PMSM. Since the load is a low-inductance machine, the PWM reflected harmonics on machine us huge.
-To solve the problem, a LC filter is implemented at the inverter output side. This structure solve two problems
+The main control structure is built using Field-oriented control (FOC) structure. This is a vector control method for PMSM. Since the load is a low-inductance machine, the PWM reflected harmonics on machine is huge.
+To solve the problem, a LC filter is implemented at the inverter output side. This structure solve two problems caused by LC filter
 
 1. LC filter natural frequency
 
