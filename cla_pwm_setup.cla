@@ -1,0 +1,168 @@
+/*
+ * pwm_setup.cla
+ *
+ *  Created on: 2020¦~3¤ë25¤é
+ *      Author: csking811116
+ */
+
+#include "cla_pwm_setup.h"
+
+__interrupt void Cla1Task1(void)
+{
+    if(EPwm4Regs.TBSTS.bit.CTRDIR==0)       /*TBCTR=0*/
+    {
+        if(HFI_theta_test_toCLA<0.167)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 2;
+              EPwm4Regs.AQCTLA.bit.CBU = 1;
+              EPwm5Regs.AQCTLA.bit.CAU = 2;
+              EPwm5Regs.AQCTLA.bit.CBU = 0;
+              EPwm6Regs.AQCTLA.bit.CAU = 0;
+              EPwm6Regs.AQCTLA.bit.CBU = 0;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 0;
+              EPwm4Regs.AQCTLA.bit.CBD = 0;
+              EPwm5Regs.AQCTLA.bit.CAD = 0;
+              EPwm5Regs.AQCTLA.bit.CBD = 1;
+              EPwm6Regs.AQCTLA.bit.CAD = 2;
+              EPwm6Regs.AQCTLA.bit.CBD = 1;
+
+//              EPwm5Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA - svgenTa_toCLA)*INV_PWM_TBPRD;  // PWM 2A - PhaseB
+//              EPwm6Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA - svgenTa_toCLA)*INV_PWM_TBPRD;    // PWM 3A - PhaseC
+//              EPwm6Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA - svgenTa_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTc_toCLA - svgenTa_toCLA)*INV_PWM_TBPRD;
+        }
+        else if(HFI_theta_test_toCLA<0.334)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 2;
+              EPwm4Regs.AQCTLA.bit.CBU = 0;
+              EPwm5Regs.AQCTLA.bit.CAU = 2;
+              EPwm5Regs.AQCTLA.bit.CBU = 1;
+              EPwm6Regs.AQCTLA.bit.CAU = 0;
+              EPwm6Regs.AQCTLA.bit.CBU = 0;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 0;
+              EPwm4Regs.AQCTLA.bit.CBD = 1;
+              EPwm5Regs.AQCTLA.bit.CAD = 0;
+              EPwm5Regs.AQCTLA.bit.CBD = 0;
+              EPwm6Regs.AQCTLA.bit.CAD = 2;
+              EPwm6Regs.AQCTLA.bit.CBD = 1;
+
+//              EPwm4Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;    // PWM 2A - PhaseB
+//              EPwm6Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;  // PWM 3A - PhaseC
+//              EPwm6Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;
+        }
+        else if(HFI_theta_test_toCLA<0.5)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 0;
+              EPwm4Regs.AQCTLA.bit.CBU = 0;
+              EPwm5Regs.AQCTLA.bit.CAU = 2;
+              EPwm5Regs.AQCTLA.bit.CBU = 1;
+              EPwm6Regs.AQCTLA.bit.CAU = 2;
+              EPwm6Regs.AQCTLA.bit.CBU = 0;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 2;
+              EPwm4Regs.AQCTLA.bit.CBD = 1;
+              EPwm5Regs.AQCTLA.bit.CAD = 0;
+              EPwm5Regs.AQCTLA.bit.CBD = 0;
+              EPwm6Regs.AQCTLA.bit.CAD = 0;
+              EPwm6Regs.AQCTLA.bit.CBD = 1;
+
+//              EPwm6Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;    // PWM 2A - PhaseB
+//              EPwm4Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;  // PWM 3A - PhaseC
+//              EPwm4Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTb_toCLA)*INV_PWM_TBPRD;
+        }
+        else if(HFI_theta_test_toCLA<0.667)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 0;
+              EPwm4Regs.AQCTLA.bit.CBU = 0;
+              EPwm5Regs.AQCTLA.bit.CAU = 2;
+              EPwm5Regs.AQCTLA.bit.CBU = 0;
+              EPwm6Regs.AQCTLA.bit.CAU = 2;
+              EPwm6Regs.AQCTLA.bit.CBU = 1;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 2;
+              EPwm4Regs.AQCTLA.bit.CBD = 1;
+              EPwm5Regs.AQCTLA.bit.CAD = 0;
+              EPwm5Regs.AQCTLA.bit.CBD = 1;
+              EPwm6Regs.AQCTLA.bit.CAD = 0;
+              EPwm6Regs.AQCTLA.bit.CBD = 0;
+
+//              EPwm5Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;    // PWM 2A - PhaseB
+//              EPwm4Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;  // PWM 3A - PhaseC
+//              EPwm4Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTb_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;
+        }
+        else if(HFI_theta_test_toCLA<0.84)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 2;
+              EPwm4Regs.AQCTLA.bit.CBU = 0;
+              EPwm5Regs.AQCTLA.bit.CAU = 0;
+              EPwm5Regs.AQCTLA.bit.CBU = 0;
+              EPwm6Regs.AQCTLA.bit.CAU = 2;
+              EPwm6Regs.AQCTLA.bit.CBU = 1;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 0;
+              EPwm4Regs.AQCTLA.bit.CBD = 1;
+              EPwm5Regs.AQCTLA.bit.CAD = 2;
+              EPwm5Regs.AQCTLA.bit.CBD = 1;
+              EPwm6Regs.AQCTLA.bit.CAD = 0;
+              EPwm6Regs.AQCTLA.bit.CBD = 0;
+
+//              EPwm4Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;    // PWM 2A - PhaseB
+//              EPwm5Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;  // PWM 3A - PhaseC
+//              EPwm5Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTa_toCLA-svgenTc_toCLA)*INV_PWM_TBPRD;
+        }
+        else if(HFI_theta_test_toCLA<1.01)
+        {
+              EPwm4Regs.AQCTLA.bit.CAU = 2;
+              EPwm4Regs.AQCTLA.bit.CBU = 1;
+              EPwm5Regs.AQCTLA.bit.CAU = 0;
+              EPwm5Regs.AQCTLA.bit.CBU = 0;
+              EPwm6Regs.AQCTLA.bit.CAU = 2;
+              EPwm6Regs.AQCTLA.bit.CBU = 0;
+
+              EPwm4Regs.AQCTLA.bit.CAD = 0;
+              EPwm4Regs.AQCTLA.bit.CBD = 0;
+              EPwm5Regs.AQCTLA.bit.CAD = 2;
+              EPwm5Regs.AQCTLA.bit.CBD = 1;
+              EPwm6Regs.AQCTLA.bit.CAD = 0;
+              EPwm6Regs.AQCTLA.bit.CBD = 1;
+
+//              EPwm6Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTa_toCLA)*INV_PWM_TBPRD;    // PWM 2A - PhaseB
+//              EPwm5Regs.CMPA.bit.CMPA = INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTa_toCLA)*INV_PWM_TBPRD;  // PWM 3A - PhaseC
+//              EPwm5Regs.CMPB.bit.CMPB = INV_PWM_TBPRD - _IQabs(svgenTb_toCLA-svgenTa_toCLA)*INV_PWM_TBPRD - _IQabs(svgenTc_toCLA-svgenTa_toCLA)*INV_PWM_TBPRD;
+        }
+    }
+}
+
+__interrupt void Cla1Task2(void)
+{
+
+}
+
+__interrupt void Cla1Task3(void)
+{
+
+}
+
+__interrupt void Cla1Task4(void)
+{
+
+}
+
+__interrupt void Cla1Task5(void)
+{
+
+}
+__interrupt void Cla1Task6(void)
+{
+
+}
+__interrupt void Cla1Task7(void)
+{
+
+}
+
+__interrupt void Cla1Task8(void)
+{
+
+}
