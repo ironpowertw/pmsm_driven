@@ -30,6 +30,7 @@ Several parameters can be altered in `MonoMtrServo-setting.h`.
 
 `BASE_FREQ` maximum angular speed in Herz
 
+`POLES` machine poles number
 
 #### Control parameters
 `ISR_FREQUENCY` sampling frequency (control interrupt)
